@@ -6,6 +6,6 @@ services:
     ports:
       - "3000:3000"
   backend:
-    image: "lt-backendend"
+    image: "lt-backend"
     ports:
       - "8080:8080"

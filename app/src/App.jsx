@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { getLoadTime } from './requestHelpers'
 import './App.scss'
 
 
@@ -7,8 +8,11 @@ const App = () => {
 	const [urlInput, setUrlInput] = useState(null)
 	const [searchPhraseInput, setSearchPhraseInput] = useState(null)
 
-	const handleUrlSubmit = () => {
+	const handleUrlSubmit = async (event) => {
+		event.preventDefault()
 		console.log('submit', urlInput)
+		const result = await getLoadTime(urlInput)
+		console.log(result)
 	}
 
 	const handleSearchPhraseSubmit = () => {
@@ -22,7 +26,7 @@ const App = () => {
 			</h1>
 
 			<div className="url-input">
-				<form onSubmit={handleUrlSubmit}>
+				<form onSubmit={(event) => handleUrlSubmit(event)}>
 					<p>
 						Enter URL
 					</p>
@@ -34,7 +38,7 @@ const App = () => {
 			</div>
 
 			<div className="search-phrase-input">
-				<form onSubmit={handleSearchPhraseSubmit}>
+				<form onSubmit={() => handleSearchPhraseSubmit()}>
 					<p>
 						Enter search phrase
 					</p>
