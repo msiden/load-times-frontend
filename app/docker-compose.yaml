@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  frontend:
+    image: "lt-frontend:latest"
+    ports:
+      - "3000:3000"
+  backend:
+    image: "lt-backendend"
+    ports:
+      - "8080:8080"

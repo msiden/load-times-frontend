@@ -1,0 +1,38 @@
+$primary-color: lavender;
+$secondary-color: rgb(180, 180, 253);
+$action-color: rgb(255, 136, 0);
+$action-color-highlight: rgb(255, 0, 0);
+$yellow: rgb(255, 255, 50);
+
+
+
+body {
+    background-color: turquoise;
+}
+
+.main {
+	margin: auto;
+	margin-top: 100px;
+	width: 90%;
+	text-align: center;
+	font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .title {
+        min-height: 100px;
+        margin-top: 20px;
+    }
+
+    table {
+        margin-top: 50px;
+
+        tr {
+            font-size: 16px;
+        }
+    }
+}
+
+
+
