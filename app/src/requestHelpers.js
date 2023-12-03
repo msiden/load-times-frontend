@@ -1,10 +1,11 @@
 
 const LOCALHOST = 'http://127.0.0.1:8000'
 
-export const getLoadTime = async (url) => {
+export const getLoadTime = async (url, searchPhrase) => {
     return await makeRequest(
         'GET', `${LOCALHOST}/get_load_time`, {
-            url: url
+            url: url,
+            search_phrase: searchPhrase
         }
     )
 }

@@ -8,15 +8,11 @@ const App = () => {
 	const [urlInput, setUrlInput] = useState(null)
 	const [searchPhraseInput, setSearchPhraseInput] = useState(null)
 
-	const handleUrlSubmit = async (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault()
-		console.log('submit', urlInput)
-		const result = await getLoadTime(urlInput)
+		console.log('submit', urlInput, searchPhraseInput)
+		const result = await getLoadTime(urlInput, searchPhraseInput)
 		console.log(result)
-	}
-
-	const handleSearchPhraseSubmit = () => {
-		console.log('submit', searchPhraseInput)
 	}
 
 	return (
@@ -26,26 +22,18 @@ const App = () => {
 			</h1>
 
 			<div className="url-input">
-				<form onSubmit={(event) => handleUrlSubmit(event)}>
-					<p>
-						Enter URL
-					</p>
+				<form onSubmit={(event) => handleSubmit(event)}>
+					<p>Enter URL</p>
 					<input type="text" onChange={(e) => setUrlInput(e.target.value)} />
-					<button type="submit">
-						GO
-					</button>
-				</form>
-			</div>
 
-			<div className="search-phrase-input">
-				<form onSubmit={() => handleSearchPhraseSubmit()}>
-					<p>
-						Enter search phrase
-					</p>
+					<p>Enter search phrase</p>
 					<input type="text" onChange={(e) => setSearchPhraseInput(e.target.value)} />
-					<button type="submit">
-						GO
-					</button>
+
+					<div>
+						<button type="submit">
+							GO
+						</button>
+					</div>
 				</form>
 			</div>
 
