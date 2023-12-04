@@ -10,6 +10,13 @@ export const getLoadTime = async (url, searchPhrase) => {
     )
 }
 
+export const getResults = async () => {
+    return await makeRequest(
+        'GET', `${LOCALHOST}/get_results`
+    )
+}
+
+
 const errorHandler = (error) => {
     console.log('Request failed!', error)
 }

@@ -1,5 +1,5 @@
-import {useState} from 'react'
-import { getLoadTime } from './requestHelpers'
+import { useState } from 'react'
+import { getLoadTime, getResults } from './requestHelpers'
 import './App.scss'
 
 
@@ -7,12 +7,22 @@ const App = () => {
 
 	const [urlInput, setUrlInput] = useState(null)
 	const [searchPhraseInput, setSearchPhraseInput] = useState(null)
+	const [searchResults, setSearchResults] = useState([])
+	const [fetchResults, setFetchResults] = useState(true)
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		console.log('submit', urlInput, searchPhraseInput)
-		const result = await getLoadTime(urlInput, searchPhraseInput)
-		console.log(result)
+		await getLoadTime(urlInput, searchPhraseInput)
+		setFetchResults(true)
+	}
+
+	const getSearchResults = async () => {
+		return await getResults()
+	}
+
+	if (fetchResults) {
+		getSearchResults().then((results) => setSearchResults(results))
+		setFetchResults(false)
 	}
 
 	return (
@@ -42,22 +52,25 @@ const App = () => {
 					<tr>
 						<th>URL</th>
 						<th>Search phrase</th>
-						<th>Elapsed time</th>
+						<th>Response time</th>
 						<th>Start time</th>
-						<th>Hits</th>
+						<th>Occurencies</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>google.se</td>
-						<td>Hey man</td>
-						<td>000.1ms</td>
-						<td>2023-12-01 09:45</td>
-						<td>999 000 999</td>
-					</tr>
+					{ searchResults.map(result => {
+						return (
+							<tr key={result.id}>
+								<td>{result.url}</td>
+								<td>{result.search_phrase}</td>
+								<td>{result.response_time}</td>
+								<td>{result.start_time}</td>
+								<td>{result.occurencies}</td>
+							</tr>
+						)
+					})}
 				</tbody>
-				</table>
-
+			</table>
 		</div>
   	)
 }
